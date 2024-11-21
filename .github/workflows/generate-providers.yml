@@ -10,8 +10,17 @@ on:
 jobs:
     generate:
         runs-on: ubuntu-latest
+        permissions:
+            contents: write
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
+              with:
+                  ref: ${{ github.head_ref }}
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
 
             - name: Generate Combined File
               run: |
@@ -32,9 +41,8 @@ jobs:
                   cat providers.json | jq '.' > /dev/null
 
             - name: Commit and Push
-              run: |
-                  git config --local user.email "action@github.com"
-                  git config --local user.name "GitHub Action"
-                  git add providers.json
-                  git diff --quiet && git diff --staged --quiet || git commit -m "Auto-generate providers.json"
-                  git push
+              uses: stefanzweifel/git-auto-commit-action@v5
+              with:
+                  commit_message: "Auto-generate providers.json"
+                  file_pattern: "providers.json"
+                  branch: main
