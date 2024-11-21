@@ -1,0 +1,40 @@
+{
+    "name": "TCBScans",
+    "baseUrl": "https://tcbscans.me",
+    "selectors": {
+        "search": {
+            "searchUrl": "/projects",
+            "container": ".bg-card",
+            "title": "a.mb-3",
+            "url": "a",
+            "poster": "img"
+        },
+        "details": {
+            "title": "h1",
+            "poster": ".flex.items-center.justify-center > img",
+            "description": ".px-4.py-6 > p",
+            "authors": "",
+            "genres": "",
+            "status": "",
+            "seriesType": ""
+        },
+        "chapters": {
+            "container": ".col-span-2 > a",
+            "title": "",
+            "number": "",
+            "date": "",
+            "url": ""
+        },
+        "pages": {
+            "container": "img",
+            "imageAttribute": "src"
+        }
+    },
+    "parsing": {
+        "dateFormat": "noOp",
+        "chapterRegex": "Chapter (\\d+(\\.\\d+)?)",
+        "statusMapping": {
+            "_default": "ONGOING"
+        }
+    }
+}

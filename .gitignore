@@ -1,0 +1,13 @@
+# Generated file
+/providers.json
+
+# Node
+node_modules/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db

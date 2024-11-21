@@ -1,0 +1,40 @@
+name: Generate Combined Providers File
+
+on:
+    push:
+        branches: [main]
+        paths:
+            - "providers/**"
+    workflow_dispatch:
+
+jobs:
+    generate:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Generate Combined File
+              run: |
+                  echo "[" > providers.json
+                  first=true
+                  for f in providers/*.json; do
+                    if [ "$first" = true ]; then
+                      first=false
+                    else
+                      echo "," >> providers.json
+                    fi
+                    cat "$f" >> providers.json
+                  done
+                  echo "]" >> providers.json
+
+            - name: Validate JSON
+              run: |
+                  cat providers.json | jq '.' > /dev/null
+
+            - name: Commit and Push
+              run: |
+                  git config --local user.email "action@github.com"
+                  git config --local user.name "GitHub Action"
+                  git add providers.json
+                  git diff --quiet && git diff --staged --quiet || git commit -m "Auto-generate providers.json"
+                  git push
