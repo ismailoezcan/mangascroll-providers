@@ -1,47 +1,47 @@
 {
-    "name": "MangaPill",
-    "baseUrl": "https://mangapill.com",
-    "selectors": {
-        "search": {
-            "searchUrl": "/search?genre={genre}&status={status}&q=&page={pageNumber}",
-            "container": ".grid > div:not([class])",
-            "title": ".font-black",
-            "url": ".relative",
-            "poster": "img"
-        },
-        "details": {
-            "title": "h1",
-            "poster": "img",
-            "description": ".text-sm.text--secondary",
-            "authors": "",
-            "genres": "div > a.text-brand.text-sm.mr-1",
-            "status": "div.grid.grid-cols-1.mb-3 > div:nth-child(2) > div",
-            "seriesType": ".container .grid > div:nth-child(1) > div"
-        },
-        "chapters": {
-            "container": "#chapters > div > a",
-            "title": "",
-            "number": "",
-            "date": "",
-            "url": ""
-        },
-        "pages": {
-            "container": "img.js-page",
-            "imageAttribute": "data-src"
-        }
+  "name": "MangaPill",
+  "baseUrl": "https://mangapill.com",
+  "selectors": {
+    "pages": {
+      "container": "img.js-page",
+      "imageAttribute": "data-src"
     },
-    "parsing": {
-        "dateFormat": "noOp",
-        "chapterRegex": "(?:Group (\\d+))? ?Chapter (\\d+(\\.\\d+)?)",
-        "statusMapping": {
-            "publishing": "ONGOING",
-            "finished": "COMPLETED",
-            "on hiatus": "HIATUS",
-            "discontinued": "DROPPED",
-            "_default": "ONGOING"
-        }
+    "search": {
+      "url": ".relative",
+      "title": ".font-black",
+      "poster": "img",
+      "container": ".grid > div:not([class])",
+      "searchUrl": "/search?genre={genre}&status={status}&q=&page={pageNumber}",
+      "placeholderValues": {
+        "genre": "Action,Adventure,Cars,Comedy,Dementia,Demons,Doujinshi,Drama,Ecchi,Fantasy,Game,Gender Bender,Harem,Hentai,Historical,Horror,Isekai,Josei,Kids,Magic,Martial Arts,Mecha,Military,Music,Mystery,Parody,Police,Psychological,Romance,Samurai,School,Sci-Fi,Seinen,Shoujo,Shoujo Ai,Shounen,Shounen Ai,Slice of Life,Space,Sports,Super Power,Supernatural,Thriller,Vampire,Yaoi,Yuri",
+        "status": "publishing,finished,on hiatus,discontinued"
+      }
     },
-    "imageConfig": {
-        "referrer": "https://mangapill.com"
+    "details": {
+      "title": "h1",
+      "genres": "div > a.text-brand.text-sm.mr-1",
+      "poster": "img",
+      "status": "div.grid.grid-cols-1.mb-3 > div:nth-child(2) > div",
+      "authors": "no",
+      "seriesType": ".container .grid > div:nth-child(1) > div",
+      "description": ".text-sm.text--secondary"
+    },
+    "chapters": {
+      "container": "#chapters > div > a"
     }
+  },
+  "parsing": {
+    "dateFormat": "noOp",
+    "volumeRegex": "Group (\\d+(\\.\\d+)?)",
+    "chapterRegex": "Chapter (\\d+(\\.\\d+)?)",
+    "statusMapping": {
+      "hiatus": "on hiatus",
+      "dropped": "discontinued",
+      "ongoing": "publishing",
+      "completed": "finished"
+    }
+  },
+  "imageConfig": {
+    "referrer": "https://mangapill.com"
+  }
 }

@@ -2,44 +2,41 @@
     "name": "AsuraScans",
     "baseUrl": "https://asuracomic.net",
     "selectors": {
+        "pages": {
+            "container": "img.object-cover.mx-auto",
+            "imageAttribute": "src"
+        },
         "search": {
-            "searchUrl": "/series?page={pageNumber}",
-            "container": ".grid.grid-cols-2.gap-3.p-4 > a",
             "title": ".block.font-bold",
-            "url": "",
-            "poster": "img"
+            "poster": "img",
+            "container": ".grid.grid-cols-2.gap-3.p-4 > a",
+            "searchUrl": "/series?page={pageNumber}"
         },
         "details": {
             "title": "span.text-xl.font-bold",
-            "poster": "div.col-span-12 > img[alt='poster']",
-            "description": "span.font-medium.text-sm",
-            "authors": "div.grid.grid-cols-1.gap-5.mt-8 > div:nth-child(2) > h3:nth-child(2)",
             "genres": "div.space-y-1 > div > button",
+            "poster": "div.col-span-12 > img[alt='poster']",
             "status": "div[class='space-y-1.5'] > div.flex.flex-row > div:nth-child(1) > h3.capitalize",
-            "seriesType": "div[class='space-y-1.5'] > div.flex.flex-row > div:nth-child(2) > h3.capitalize"
+            "authors": "div.grid.grid-cols-1.gap-5.mt-8 > div:nth-child(2) > h3:nth-child(2)",
+            "seriesType": "h3.capitalize.cursor-pointer",
+            "description": "span.font-medium.text-sm"
         },
         "chapters": {
-            "container": "div.pl-4.pr-2.pb-4.overflow-y-auto.scrollbar-thumb-themecolor.scrollbar-track-transparent.scrollbar-thin.mr-3 > div",
-            "title": ".text-sm",
-            "number": "",
+            "url": "a",
             "date": ".text-xs",
-            "url": "a"
-        },
-        "pages": {
-            "container": "img[alt^='chapter page']",
-            "imageAttribute": "src"
+            "title": ".text-sm",
+            "container": "div.pl-4.pr-2.pb-4.overflow-y-auto.scrollbar-thumb-themecolor.scrollbar-track-transparent.scrollbar-thin.mr-3 > div"
         }
     },
     "parsing": {
         "dateFormat": "ordinal",
         "chapterRegex": "Chapter (\\d+(\\.\\d+)?)",
         "statusMapping": {
-            "ongoing": "ONGOING",
-            "completed": "COMPLETED",
-            "dropped": "DROPPED",
             "hiatus": "HIATUS",
-            "season end": "SEASON_END",
-            "_default": "ONGOING"
+            "dropped": "DROPPED",
+            "ongoing": "ONGOING",
+            "completed": "COMPLETED"
         }
-    }
+    },
+    "imageConfig": null
 }

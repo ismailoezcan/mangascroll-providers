@@ -1,44 +1,44 @@
 {
-    "name": "ManhwaFreak",
-    "baseUrl": "https://manhwafreak.com",
-    "selectors": {
-        "search": {
-            "searchUrl": "/series?page={pageNumber}",
-            "container": ".grid.grid-cols-2.gap-3.p-4 > a",
-            "title": ".block.font-bold",
-            "url": "",
-            "poster": "img"
-        },
-        "details": {
-            "title": "span.text-xl.font-bold",
-            "poster": "div.col-span-12 > img[alt='poster']",
-            "description": "span.font-medium.text-sm",
-            "authors": "div.grid.grid-cols-1.gap-5.mt-8 > div:nth-child(2) > h3:nth-child(2)",
-            "genres": "div.space-y-1 > div > button",
-            "status": "div[class='space-y-1.5'] > div.flex.flex-row > div:nth-child(1) > h3.capitalize",
-            "seriesType": "div[class='space-y-1.5'] > div.flex.flex-row > div:nth-child(2) > h3.capitalize"
-        },
-        "chapters": {
-            "container": "div.pl-4.pr-2.pb-4.overflow-y-auto.scrollbar-thumb-themecolor.scrollbar-track-transparent.scrollbar-thin.mr-3 > div",
-            "title": ".text-sm",
-            "number": "",
-            "date": ".text-xs",
-            "url": "a"
-        },
-        "pages": {
-            "container": "img[alt^='chapter page']",
-            "imageAttribute": "src"
-        }
+  "name": "ManhwaFreak",
+  "baseUrl": "https://manhwafreake.com",
+  "selectors": {
+    "pages": {
+      "container": ".ts-main-image",
+      "imageAttribute": "src"
     },
-    "parsing": {
-        "dateFormat": "standard",
-        "chapterRegex": "Chapter (\\d+(\\.\\d+)?)",
-        "statusMapping": {
-            "ongoing": "ONGOING",
-            "completed": "COMPLETED",
-            "dropped": "DROPPED",
-            "hiatus": "HIATUS",
-            "_default": "ONGOING"
-        }
+    "search": {
+      "url": "a",
+      "title": ".tt",
+      "poster": "img",
+      "container": ".bsx",
+      "searchUrl": "/series?page={pageNumber}"
+    },
+    "details": {
+      "title": "h1.entry-title",
+      "genres": ".mgen a",
+      "poster": ".info-left-margin .wp-post-image",
+      "status": ".info-left .imptdt:nth-child(1) i",
+      "authors": ".info-left .imptdt:nth-child(3) i",
+      "seriesType": ".info-left .imptdt a",
+      "description": ".entry-content p"
+    },
+    "chapters": {
+      "url": "a",
+      "date": ".chapterdate",
+      "title": ".chapternum",
+      "container": "#chapterlist li"
     }
+  },
+  "parsing": {
+    "dateFormat": "standard",
+    "volumeRegex": "Volume (\\d+(\\.\\d+)?)",
+    "chapterRegex": "Chapter (\\d+(\\.\\d+)?)",
+    "statusMapping": {
+      "hiatus": "HIATUS",
+      "dropped": "DROPPED",
+      "ongoing": "ONGOING",
+      "completed": "COMPLETED"
+    }
+  },
+  "imageConfig": null
 }

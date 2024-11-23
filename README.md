@@ -18,11 +18,15 @@ Each provider is defined in a JSON file with the following structure:
 	"baseUrl": "https://example.com",
 	"selectors": {
 		"search": {
-			"searchUrl": "/search?page={pageNumber}",
+			"searchUrl": "/search?page={pageNumber}&genre={genre}&status={status}",
 			"container": ".search-results",
 			"title": ".manga-title",
 			"url": ".manga-link",
-			"poster": "img.poster"
+			"poster": "img.poster",
+			"placeholderValues": {
+				"genre": "Action,Adventure,...",
+				"status": "publishing,finished,..."
+			}
 		},
 		"details": {
 			"title": "h1.title",
@@ -48,9 +52,12 @@ Each provider is defined in a JSON file with the following structure:
 	"parsing": {
 		"dateFormat": "standard | noOp | ordinal",
 		"chapterRegex": "Chapter (\\d+(\\.\\d+)?)",
+		"volumeRegex": "Volume (\\d+(\\.\\d+)?)", // Optional
 		"statusMapping": {
 			"ongoing": "ONGOING",
 			"completed": "COMPLETED",
+			"hiatus": "HIATUS",
+			"dropped": "DROPPED",
 			"_default": "ONGOING"
 		}
 	},
@@ -62,22 +69,29 @@ Each provider is defined in a JSON file with the following structure:
 
 ### Fields Explanation
 
+#### Base Configuration
+
+-   `name`: The display name of the provider
+-   `baseUrl`: The base URL of the manga site. This is crucial for constructing full URLs
+
 #### Selectors
 
 -   `search`: Selectors for the search page
 
-    -   `searchUrl`: URL template for search (supports {pageNumber} placeholder)
+    -   `searchUrl`: URL template for search (supports placeholders like {pageNumber}, {genre}, {status})
     -   `container`: Container element for each manga in search results
     -   `title`: Title element selector
     -   `url`: URL element selector (if different from container)
     -   `poster`: Poster image selector
+    -   `placeholderValues`: Optional mapping of placeholder values for advanced search, not needed for pageNumber,
+        which is 1 to X
 
 -   `details`: Selectors for manga details page
 
     -   `title`: Manga title selector
     -   `poster`: Cover image selector
     -   `description`: Description text selector
-    -   `authors`: Authors text selector
+    -   `authors`: Authors text selector (can be empty string or "no" if not available)
     -   `genres`: Genres elements selector
     -   `status`: Status text selector
     -   `seriesType`: Series type selector (manga/manhwa/etc)
@@ -86,13 +100,13 @@ Each provider is defined in a JSON file with the following structure:
 
     -   `container`: Container element for each chapter
     -   `title`: Chapter title selector
-    -   `number`: Chapter number selector
+    -   `number`: Chapter number selector (optional)
     -   `date`: Release date selector
-    -   `url`: Chapter URL selector
+    -   `url`: Chapter URL selector (can be empty if container is clickable)
 
 -   `pages`: Selectors for chapter pages
     -   `container`: Image container selector
-    -   `imageAttribute`: Attribute containing image URL
+    -   `imageAttribute`: Attribute containing image URL (usually "src" or "data-src")
 
 #### Parsing Configuration
 
@@ -105,7 +119,12 @@ Each provider is defined in a JSON file with the following structure:
 -   `chapterRegex`: Regular expression for extracting chapter numbers
 
     -   Must include at least one capture group for the chapter number
-    -   Optional first capture group for volume number
+    -   Optional decimal support with (\\.\\d+)?
+
+-   `volumeRegex`: Optional regular expression for extracting volume numbers
+
+    -   Similar structure to chapterRegex
+    -   Used when series has volume information
 
 -   `statusMapping`: Map provider status text to MangaScroll status
     -   Keys: Provider's status text (lowercase)
@@ -116,6 +135,7 @@ Each provider is defined in a JSON file with the following structure:
 
 -   `imageConfig`: Optional configuration for image loading
     -   `referrer`: Referrer URL for image requests
+    -   Can be null if no special configuration is needed
 
 ## Contributing
 
