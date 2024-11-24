@@ -1,45 +1,47 @@
 [
 {
-    "name": "AsuraScans",
-    "baseUrl": "https://asuracomic.net",
-    "selectors": {
-        "pages": {
-            "container": "img.object-cover.mx-auto",
-            "imageAttribute": "src"
-        },
-        "search": {
-            "title": ".block.font-bold",
-            "poster": "img",
-            "container": ".grid.grid-cols-2.gap-3.p-4 > a",
-            "searchUrl": "/series?page={pageNumber}"
-        },
-        "details": {
-            "title": "span.text-xl.font-bold",
-            "genres": "div.space-y-1 > div > button",
-            "poster": "div.col-span-12 > img[alt='poster']",
-            "status": "div[class='space-y-1.5'] > div.flex.flex-row > div:nth-child(1) > h3.capitalize",
-            "authors": "div.grid.grid-cols-1.gap-5.mt-8 > div:nth-child(2) > h3:nth-child(2)",
-            "seriesType": "h3.capitalize.cursor-pointer",
-            "description": "span.font-medium.text-sm"
-        },
-        "chapters": {
-            "url": "a",
-            "date": ".text-xs",
-            "title": ".text-sm",
-            "container": "div.pl-4.pr-2.pb-4.overflow-y-auto.scrollbar-thumb-themecolor.scrollbar-track-transparent.scrollbar-thin.mr-3 > div"
-        }
+  "name": "AsuraScans",
+  "baseUrl": "https://asuracomic.net",
+  "selectors": {
+    "pages": {
+      "container": "img.object-cover.mx-auto",
+      "imageAttribute": "src"
     },
-    "parsing": {
-        "dateFormat": "ordinal",
-        "chapterRegex": "Chapter (\\d+(\\.\\d+)?)",
-        "statusMapping": {
-            "hiatus": "HIATUS",
-            "dropped": "DROPPED",
-            "ongoing": "ONGOING",
-            "completed": "COMPLETED"
-        }
+    "search": {
+      "title": ".block.font-bold",
+      "poster": "img",
+      "container": ".grid.grid-cols-2.gap-3.p-4 > a",
+      "searchUrl": "/series?page={pageNumber}"
     },
-    "imageConfig": null
+    "details": {
+      "title": "span.text-xl.font-bold",
+      "genres": "div.space-y-1 > div > button",
+      "poster": "div.col-span-12 > img[alt='poster']",
+      "status": "//div[h3[text()='Status']]/h3[2]",
+      "authors": "//div[h3[text()='Author']]/h3[2]",
+      "seriesType": "//div[h3[text()='Type']]/h3[2]",
+      "description": "span.font-medium.text-sm"
+    },
+    "chapters": {
+      "url": "a",
+      "date": ".text-xs",
+      "title": ".text-sm",
+      "container": "div.pl-4.pr-2.pb-4.overflow-y-auto.scrollbar-thumb-themecolor.scrollbar-track-transparent.scrollbar-thin.mr-3 > div"
+    }
+  },
+  "parsing": {
+    "dateFormat": "ordinal",
+    "volumeRegex": "Volume (\\d+(\\.\\d+)?)",
+    "chapterRegex": "Chapter (\\d+(\\.\\d+)?)",
+    "statusMapping": {
+      "hiatus": "HIATUS",
+      "dropped": "DROPPED",
+      "ongoing": "ONGOING",
+      "completed": "COMPLETED"
+    }
+  },
+  "imageConfig": null,
+  "enabled": true
 },
 {
   "name": "CulturedWorks",
@@ -61,8 +63,8 @@
       "genres": ".meta .genres.mt-10 .genre-item",
       "poster": ".img-thumb img.wp-post-image",
       "status": ".rating-status.mt-5 .status",
-      "authors": "div.tsinfo.bixbox > div:nth-child(3) > i",
-      "seriesType": "div.tsinfo.bixbox > div:nth-child(1) > a",
+      "authors": "//div[@class='imptdt' and contains(., 'Author')]/i",
+      "seriesType": "//div[@class='imptdt' and contains(., 'Type')]/a",
       "description": ".entry-content p"
     },
     "chapters": {
@@ -74,6 +76,7 @@
   },
   "parsing": {
     "dateFormat": "standard",
+    "volumeRegex": "Volume (\\d+(\\.\\d+)?)",
     "chapterRegex": "Chapter (\\d+(\\.\\d+)?)",
     "statusMapping": {
       "hiatus": "HIATUS",
@@ -82,52 +85,52 @@
       "completed": "COMPLETED"
     }
   },
-  "imageConfig": null
+  "imageConfig": null,
+  "enabled": true
 },
 {
   "name": "FlameComics",
-  "baseUrl": "https://flamecomics.com",
+  "baseUrl": "https://flamecomics.xyz",
   "selectors": {
     "pages": {
-      "container": "img[alt^='chapter page']",
+      "container": ".mantine-Stack-root img",
       "imageAttribute": "src"
     },
     "search": {
-      "url": "",
-      "title": ".block.font-bold",
+      "url": "//a[contains(@class, 'DescSeriesCard_title') and contains(@href, '/series/')]",
+      "title": "//a[contains(@class, 'DescSeriesCard_title') and contains(@href, '/series/')]",
       "poster": "img",
-      "container": ".grid.grid-cols-2.gap-3.p-4 > a",
-      "searchUrl": "/series?page={pageNumber}"
+      "container": "//div[contains(@class, 'DescSeriesCard_cardContainer')]",
+      "searchUrl": "/browse"
     },
     "details": {
-      "title": "span.text-xl.font-bold",
-      "genres": "div.space-y-1 > div > button",
-      "poster": "div.col-span-12 > img[alt='poster']",
-      "status": "div[class='space-y-1.5'] > div.flex.flex-row > div:nth-child(1) > h3.capitalize",
-      "authors": "div.grid.grid-cols-1.gap-5.mt-8 > div:nth-child(2) > h3:nth-child(2)",
-      "seriesType": "div[class='space-y-1.5'] > div.flex.flex-row > div:nth-child(2) > h3.capitalize",
-      "description": "span.font-medium.text-sm"
+      "title": "h1",
+      "genres": "//div[contains(@class, 'mantine-Group-root')]//a[contains(@class, 'mantine-Badge-root')]",
+      "poster": "img[alt='Cover']",
+      "status": "//div[contains(@class, 'mantine-Badge-root')]//span[contains(@class, 'mantine-Badge-label')]",
+      "authors": "//p[text()='Author']/following-sibling::p[contains(@class, 'mantine-Text-root')]",
+      "seriesType": "//p[text()='Type']/following-sibling::p[contains(@class, 'mantine-Text-root')]",
+      "description": "//h3[text()='Description']/following-sibling::div//p[contains(@class, 'mantine-Text-root')]"
     },
     "chapters": {
-      "url": "a",
-      "date": ".text-xs",
-      "title": ".text-sm",
-      "number": "",
-      "container": "div.pl-4.pr-2.pb-4.overflow-y-auto.scrollbar-thumb-themecolor.scrollbar-track-transparent.scrollbar-thin.mr-3 > div"
+      "date": "//p[contains(@class, 'mantine-Text-root') and @data-size='xs']",
+      "title": "//p[contains(@class, 'mantine-Text-root') and @data-size='md']",
+      "container": "//a[contains(@class, 'ChapterCard_chapterWrapper')]"
     }
   },
   "parsing": {
-    "dateFormat": "standard",
+    "dateFormat": "relative",
+    "volumeRegex": "Volume (\\d+(\\.\\d+)?)",
     "chapterRegex": "Chapter (\\d+(\\.\\d+)?)",
     "statusMapping": {
       "hiatus": "HIATUS",
       "dropped": "DROPPED",
       "ongoing": "ONGOING",
-      "_default": "ONGOING",
       "completed": "COMPLETED"
     }
   },
-  "imageConfig": {}
+  "imageConfig": null,
+  "enabled": false
 },
 {
   "name": "MangaPill",
@@ -152,9 +155,8 @@
       "title": "h1",
       "genres": "div > a.text-brand.text-sm.mr-1",
       "poster": "img",
-      "status": "div.grid.grid-cols-1.mb-3 > div:nth-child(2) > div",
-      "authors": "no",
-      "seriesType": ".container .grid > div:nth-child(1) > div",
+      "status": "//div[label[text()='Status']]/div",
+      "seriesType": "//div[label[text()='Type']]/div",
       "description": ".text-sm.text--secondary"
     },
     "chapters": {
@@ -174,7 +176,8 @@
   },
   "imageConfig": {
     "referrer": "https://mangapill.com"
-  }
+  },
+  "enabled": true
 },
 {
   "name": "ManhwaFreak",
@@ -195,9 +198,9 @@
       "title": "h1.entry-title",
       "genres": ".mgen a",
       "poster": ".info-left-margin .wp-post-image",
-      "status": ".info-left .imptdt:nth-child(1) i",
-      "authors": ".info-left .imptdt:nth-child(3) i",
-      "seriesType": ".info-left .imptdt a",
+      "status": "//div[@class='imptdt' and contains(., 'Status')]/i",
+      "authors": "//div[@class='imptdt' and contains(., 'Author')]/i",
+      "seriesType": "//div[@class='imptdt' and contains(., 'Type')]/a",
       "description": ".entry-content p"
     },
     "chapters": {
@@ -218,7 +221,8 @@
       "completed": "COMPLETED"
     }
   },
-  "imageConfig": null
+  "imageConfig": null,
+  "enabled": true
 },
 {
   "name": "TCBScans",
@@ -259,7 +263,8 @@
       "_default": "ONGOING"
     }
   },
-  "imageConfig": {}
+  "imageConfig": {},
+  "enabled": true
 },
 {
   "name": "VoidScans",
@@ -280,9 +285,9 @@
       "title": "h1.entry-title",
       "genres": ".mgen a",
       "poster": ".info-left-margin .wp-post-image",
-      "status": ".info-left .imptdt:nth-child(1) i",
-      "authors": ".info-left .imptdt:nth-child(3) i",
-      "seriesType": ".info-left .imptdt a",
+      "status": "//div[@class='imptdt' and contains(., 'Status')]/i",
+      "authors": "//div[@class='imptdt' and contains(., 'Author')]/i",
+      "seriesType": "//div[@class='imptdt' and contains(., 'Type')]/a",
       "description": ".entry-content p"
     },
     "chapters": {
@@ -303,5 +308,6 @@
       "completed": "COMPLETED"
     }
   },
-  "imageConfig": null
+  "imageConfig": null,
+  "enabled": true
 }]
