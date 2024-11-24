@@ -1,45 +1,44 @@
 {
   "name": "FlameComics",
-  "baseUrl": "https://flamecomics.com",
+  "baseUrl": "https://flamecomics.xyz",
   "selectors": {
     "pages": {
-      "container": "img[alt^='chapter page']",
+      "container": ".mantine-Stack-root img",
       "imageAttribute": "src"
     },
     "search": {
-      "url": "",
-      "title": ".block.font-bold",
+      "url": "//a[contains(@class, 'DescSeriesCard_title') and contains(@href, '/series/')]",
+      "title": "//a[contains(@class, 'DescSeriesCard_title') and contains(@href, '/series/')]",
       "poster": "img",
-      "container": ".grid.grid-cols-2.gap-3.p-4 > a",
-      "searchUrl": "/series?page={pageNumber}"
+      "container": "//div[contains(@class, 'DescSeriesCard_cardContainer')]",
+      "searchUrl": "/browse"
     },
     "details": {
-      "title": "span.text-xl.font-bold",
-      "genres": "div.space-y-1 > div > button",
-      "poster": "div.col-span-12 > img[alt='poster']",
-      "status": "div[class='space-y-1.5'] > div.flex.flex-row > div:nth-child(1) > h3.capitalize",
-      "authors": "div.grid.grid-cols-1.gap-5.mt-8 > div:nth-child(2) > h3:nth-child(2)",
-      "seriesType": "div[class='space-y-1.5'] > div.flex.flex-row > div:nth-child(2) > h3.capitalize",
-      "description": "span.font-medium.text-sm"
+      "title": "h1",
+      "genres": "//div[contains(@class, 'mantine-Group-root')]//a[contains(@class, 'mantine-Badge-root')]",
+      "poster": "img[alt='Cover']",
+      "status": "//div[contains(@class, 'mantine-Badge-root')]//span[contains(@class, 'mantine-Badge-label')]",
+      "authors": "//p[text()='Author']/following-sibling::p[contains(@class, 'mantine-Text-root')]",
+      "seriesType": "//p[text()='Type']/following-sibling::p[contains(@class, 'mantine-Text-root')]",
+      "description": "//h3[text()='Description']/following-sibling::div//p[contains(@class, 'mantine-Text-root')]"
     },
     "chapters": {
-      "url": "a",
-      "date": ".text-xs",
-      "title": ".text-sm",
-      "number": "",
-      "container": "div.pl-4.pr-2.pb-4.overflow-y-auto.scrollbar-thumb-themecolor.scrollbar-track-transparent.scrollbar-thin.mr-3 > div"
+      "date": "//p[contains(@class, 'mantine-Text-root') and @data-size='xs']",
+      "title": "//p[contains(@class, 'mantine-Text-root') and @data-size='md']",
+      "container": "//a[contains(@class, 'ChapterCard_chapterWrapper')]"
     }
   },
   "parsing": {
-    "dateFormat": "standard",
+    "dateFormat": "relative",
+    "volumeRegex": "Volume (\\d+(\\.\\d+)?)",
     "chapterRegex": "Chapter (\\d+(\\.\\d+)?)",
     "statusMapping": {
       "hiatus": "HIATUS",
       "dropped": "DROPPED",
       "ongoing": "ONGOING",
-      "_default": "ONGOING",
       "completed": "COMPLETED"
     }
   },
-  "imageConfig": {}
+  "imageConfig": null,
+  "enabled": false
 }

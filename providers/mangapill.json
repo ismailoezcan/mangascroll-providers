@@ -21,9 +21,8 @@
       "title": "h1",
       "genres": "div > a.text-brand.text-sm.mr-1",
       "poster": "img",
-      "status": "div.grid.grid-cols-1.mb-3 > div:nth-child(2) > div",
-      "authors": "no",
-      "seriesType": ".container .grid > div:nth-child(1) > div",
+      "status": "//div[label[text()='Status']]/div",
+      "seriesType": "//div[label[text()='Type']]/div",
       "description": ".text-sm.text--secondary"
     },
     "chapters": {
@@ -43,5 +42,6 @@
   },
   "imageConfig": {
     "referrer": "https://mangapill.com"
-  }
+  },
+  "enabled": true
 }

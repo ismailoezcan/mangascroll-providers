@@ -37,5 +37,6 @@
       "_default": "ONGOING"
     }
   },
-  "imageConfig": {}
+  "imageConfig": {},
+  "enabled": true
 }

@@ -63,7 +63,8 @@ Each provider is defined in a JSON file with the following structure:
 	},
 	"imageConfig": {
 		"referrer": "https://example.com" // Optional: for sites that need specific referrer
-	}
+	},
+	"enabled": true
 }
 ```
 
@@ -73,6 +74,7 @@ Each provider is defined in a JSON file with the following structure:
 
 -   `name`: The display name of the provider
 -   `baseUrl`: The base URL of the manga site. This is crucial for constructing full URLs
+-   `enabled`: The default enabled status
 
 #### Selectors
 

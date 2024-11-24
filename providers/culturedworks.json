@@ -18,8 +18,8 @@
       "genres": ".meta .genres.mt-10 .genre-item",
       "poster": ".img-thumb img.wp-post-image",
       "status": ".rating-status.mt-5 .status",
-      "authors": "div.tsinfo.bixbox > div:nth-child(3) > i",
-      "seriesType": "div.tsinfo.bixbox > div:nth-child(1) > a",
+      "authors": "//div[@class='imptdt' and contains(., 'Author')]/i",
+      "seriesType": "//div[@class='imptdt' and contains(., 'Type')]/a",
       "description": ".entry-content p"
     },
     "chapters": {
@@ -31,6 +31,7 @@
   },
   "parsing": {
     "dateFormat": "standard",
+    "volumeRegex": "Volume (\\d+(\\.\\d+)?)",
     "chapterRegex": "Chapter (\\d+(\\.\\d+)?)",
     "statusMapping": {
       "hiatus": "HIATUS",
@@ -39,5 +40,6 @@
       "completed": "COMPLETED"
     }
   },
-  "imageConfig": null
+  "imageConfig": null,
+  "enabled": true
 }

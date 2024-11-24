@@ -17,9 +17,9 @@
       "title": "h1.entry-title",
       "genres": ".mgen a",
       "poster": ".info-left-margin .wp-post-image",
-      "status": ".info-left .imptdt:nth-child(1) i",
-      "authors": ".info-left .imptdt:nth-child(3) i",
-      "seriesType": ".info-left .imptdt a",
+      "status": "//div[@class='imptdt' and contains(., 'Status')]/i",
+      "authors": "//div[@class='imptdt' and contains(., 'Author')]/i",
+      "seriesType": "//div[@class='imptdt' and contains(., 'Type')]/a",
       "description": ".entry-content p"
     },
     "chapters": {
@@ -40,5 +40,6 @@
       "completed": "COMPLETED"
     }
   },
-  "imageConfig": null
+  "imageConfig": null,
+  "enabled": true
 }
